@@ -1,0 +1,24 @@
+[gd_scene load_steps=5 format=3 uid="uid://tvvl26pbldfg"]
+
+[ext_resource type="Script" path="res://spell/spell_collision.gd" id="1_1087f"]
+[ext_resource type="Texture2D" uid="uid://bb8t8n8d61eyy" path="res://sprites/character.png" id="1_spu37"]
+[ext_resource type="AudioStream" uid="uid://cquljwhr1rrfj" path="res://audio/foom_0.wav" id="4_g8fdg"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_yi4m5"]
+
+[node name="SpellNode" type="Area2D" groups=["spells"]]
+script = ExtResource("1_1087f")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+position = Vector2(923.5, 435.5)
+scale = Vector2(0.042, 0.042)
+texture = ExtResource("1_spu37")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(923.5, 435.5)
+shape = SubResource("CircleShape2D_yi4m5")
+
+[node name="SpellSound" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("4_g8fdg")
+
+[connection signal="area_entered" from="." to="." method="on_collision"]

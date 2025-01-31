@@ -1,0 +1,53 @@
+[gd_scene load_steps=11 format=3 uid="uid://dqy22axflwke8"]
+
+[ext_resource type="Script" path="res://main/main.gd" id="1_tu03v"]
+[ext_resource type="Texture2D" uid="uid://b8ggl6asc52ch" path="res://sprites/Mountain-Lake-Landscape-Pixel-Art-Graphics.jpg" id="2_5qfcw"]
+[ext_resource type="Texture2D" uid="uid://ckos3ts336cci" path="res://sprites/quiditch.jpeg" id="3_76c2j"]
+[ext_resource type="Script" path="res://main/main_character.gd" id="4_meu5w"]
+[ext_resource type="PackedScene" uid="uid://tvvl26pbldfg" path="res://spell/spell.tscn" id="5_yuhat"]
+[ext_resource type="Texture2D" uid="uid://bb8t8n8d61eyy" path="res://sprites/character.png" id="6_wtosw"]
+[ext_resource type="Script" path="res://main/enemies.gd" id="7_f2f51"]
+[ext_resource type="PackedScene" uid="uid://ds0wxq4ddfmlg" path="res://bad_guy/bad_guy.tscn" id="8_iylg5"]
+[ext_resource type="AudioStream" uid="uid://i7qyvvpdlom8" path="res://audio/mutantdie.wav" id="9_d0dne"]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_30doq"]
+radius = 31.0
+height = 78.0
+
+[node name="RootNode" type="Node2D"]
+position = Vector2(0, -8)
+script = ExtResource("1_tu03v")
+
+[node name="background" type="Sprite2D" parent="."]
+visible = false
+position = Vector2(752, 445)
+scale = Vector2(2.57881, 2.57881)
+texture = ExtResource("2_5qfcw")
+
+[node name="background2" type="Sprite2D" parent="."]
+position = Vector2(750.664, 459)
+scale = Vector2(5.0024, 5.36905)
+texture = ExtResource("3_76c2j")
+
+[node name="Main character" type="CharacterBody2D" parent="." groups=["player"]]
+position = Vector2(3, 3)
+script = ExtResource("4_meu5w")
+spell_sprite_scene = ExtResource("5_yuhat")
+
+[node name="Character resting" type="Sprite2D" parent="Main character"]
+position = Vector2(972.5, 435.714)
+scale = Vector2(0.182, 0.186856)
+texture = ExtResource("6_wtosw")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Main character"]
+position = Vector2(972, 435.559)
+shape = SubResource("CapsuleShape2D_30doq")
+
+[node name="Enemies" type="Node2D" parent="."]
+position = Vector2(2, -1)
+script = ExtResource("7_f2f51")
+enemy_scene = ExtResource("8_iylg5")
+
+[node name="GoodbyeBadGuy" type="AudioStreamPlayer2D" parent="Enemies"]
+position = Vector2(-2, 1)
+stream = ExtResource("9_d0dne")
